@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from project.app import app
+from project.app import app, init_db
 
 
 def test_index():
@@ -12,4 +12,5 @@ def test_index():
 
 
 def test_database():
+    init_db()
     assert Path("crafty_danes.db").is_file()
