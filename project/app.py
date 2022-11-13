@@ -2,6 +2,7 @@ import sqlite3
 
 from flask import Flask, g
 
+from project.routes import configure_routes
 
 # configuration
 DATABASE = "crafty_danes.db"
@@ -12,6 +13,7 @@ app = Flask(__name__)
 # load the config
 app.config.from_object(__name__)
 
+configure_routes(app)
 
 # connect to database
 def connect_db():
@@ -19,7 +21,6 @@ def connect_db():
     rv = sqlite3.connect(app.config["DATABASE"])
     rv.row_factory = sqlite3.Row
     return rv
-
 
 # create the database
 def init_db():
@@ -29,25 +30,17 @@ def init_db():
             db.cursor().executescript(f.read())
         db.commit()
 
-
 # open database connection
 def get_db():
     if not hasattr(g, "sqlite_db"):
         g.sqlite_db = connect_db()
     return g.sqlite_db
 
-
 # close database connection
 @app.teardown_appcontext
 def close_db(error):
     if hasattr(g, "sqlite_db"):
         g.sqlite_db.close()
-
-
-@app.route("/")
-def hello():
-    return "Hello, World!"
-
 
 if __name__ == "__main__":
     app.run()
