@@ -1,9 +1,10 @@
 from pathlib import Path
+from unittest import mock
 
 from project.app import app, init_db
 
-
-def test_index():
+@mock.patch("project.app.hello", return_value="Hello, World!", autoSpec=True)
+def test_index(mock_hello):
     tester = app.test_client()
     response = tester.get("/", content_type="html/text")
 
