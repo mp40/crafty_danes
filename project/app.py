@@ -2,7 +2,7 @@ import sqlite3
 
 from flask import Flask, g
 
-from project.db import hello
+from project.db import hello, get_beers
 
 # configuration
 DATABASE = "crafty_danes.db"
@@ -43,6 +43,10 @@ def close_db(error):
 @app.route("/")
 def res():
     return hello()
+
+@app.route('/beers')
+def beers():
+    return get_beers()
 
 if __name__ == "__main__":
     app.run()
