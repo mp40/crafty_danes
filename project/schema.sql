@@ -1,6 +1,6 @@
-drop table if exists entries;
+drop table if exists beers;
 
-create table entries (
+create table beers (
   id integer primary key autoincrement,
   name text not null,
   brewery text not null,
