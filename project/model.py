@@ -3,7 +3,6 @@ from project.db import get_db
 def hello():
     return "Hello, Beers!"
 
-
 def get_beers():
 
     db = get_db()
@@ -16,5 +15,5 @@ def get_beers():
 
     return serialized_beers
 
-
- 
+def get_beer_by_id():
+    return 'beer'
