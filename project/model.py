@@ -15,8 +15,14 @@ def get_beers():
 
     return serialized_beers
 
-def get_beer_by_id():
+def get_beer_by_id(id):
     return 'beer'
 
 def post_beer(beer):
     return 'posted beer'    
+
+def delete_beer_by_id(id):
+    return    
+
+def put_beer_by_id(id):
+    return 'updated beer'

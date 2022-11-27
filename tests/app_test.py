@@ -29,14 +29,35 @@ def test_get_beer_by_id(mock_get_beer_by_id):
     assert response.json == seed_beers[0]
 
 @mock.patch("project.app.post_beer", return_value=seed_beers[0], autoSpec=True)
-def test_get_beers(mock_post_beer):
+def test_post_beer(mock_post_beer):
     request = app.test_client()
     response = request.post(
         "/beers",    
         data=json.dumps(seed_beers[0]),
         headers={"Content-Type": "application/json"}
         )
-        
+
     mock_post_beer.assert_called_with(seed_beers[0])
     assert response.status_code == 200
     assert response.json == seed_beers[0]
+
+@mock.patch("project.app.delete_beer_by_id", return_value=None, autoSpec=True)
+def test_delete_beer_by_id(mock_delete_beer_by_id):
+    request = app.test_client()
+    response = request.delete("/beers/1")
+ 
+    mock_delete_beer_by_id.assert_called_with('1')
+    assert response.status_code == 200
+
+@mock.patch("project.app.put_beer_by_id", return_value=seed_beers[0], autoSpec=True)
+def test_put_beer_by_id(mock_put_beer_by_id):
+    request = app.test_client()
+    response = request.put(
+        "/beers/1",
+        data=json.dumps(seed_beers[0]),
+        headers={"Content-Type": "application/json"}
+        )
+
+    mock_put_beer_by_id.assert_called_with('1')
+    assert response.status_code == 200
+    assert response.json == seed_beers[0]    
