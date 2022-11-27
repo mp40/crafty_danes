@@ -17,3 +17,6 @@ def get_beers():
 
 def get_beer_by_id():
     return 'beer'
+
+def post_beer(beer):
+    return 'posted beer'    
