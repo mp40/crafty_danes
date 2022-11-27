@@ -32,8 +32,9 @@ def delete(id):
 
 @app.route('/beers/<id>', methods=["PUT"])
 def update(id):
-    beer = put_beer_by_id(id)
-    return jsonify(beer)        
+    beer = request.get_json()
+    updated_beer = put_beer_by_id(id, beer)
+    return jsonify(updated_beer)        
 
 if __name__ == "__main__":
     app.run()

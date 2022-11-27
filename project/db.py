@@ -34,14 +34,14 @@ def init_db():
     db.cursor()
 
     data = [
-        (1, seed_beers[0]['name'], seed_beers[0]['brewery'], seed_beers[0]['abv'], seed_beers[0]['type'], seed_beers[0]['receptacle_size'], seed_beers[0]['receptacle_type']),
-        (2, seed_beers[1]['name'], seed_beers[1]['brewery'], seed_beers[1]['abv'], seed_beers[1]['type'], seed_beers[1]['receptacle_size'], seed_beers[1]['receptacle_type']),
-        (3, seed_beers[2]['name'], seed_beers[2]['brewery'], seed_beers[2]['abv'], seed_beers[2]['type'], seed_beers[2]['receptacle_size'], seed_beers[2]['receptacle_type']),
-        (4, seed_beers[3]['name'], seed_beers[3]['brewery'], seed_beers[3]['abv'], seed_beers[3]['type'], seed_beers[3]['receptacle_size'], seed_beers[3]['receptacle_type']),
-        (5, seed_beers[4]['name'], seed_beers[4]['brewery'], seed_beers[4]['abv'], seed_beers[4]['type'], seed_beers[4]['receptacle_size'], seed_beers[4]['receptacle_type']),
-        (6, seed_beers[5]['name'], seed_beers[5]['brewery'], seed_beers[5]['abv'], seed_beers[5]['type'], seed_beers[5]['receptacle_size'], seed_beers[5]['receptacle_type']),
+        (seed_beers[0]['name'], seed_beers[0]['brewery'], seed_beers[0]['abv'], seed_beers[0]['type'], seed_beers[0]['receptacle_size'], seed_beers[0]['receptacle_type']),
+        (seed_beers[1]['name'], seed_beers[1]['brewery'], seed_beers[1]['abv'], seed_beers[1]['type'], seed_beers[1]['receptacle_size'], seed_beers[1]['receptacle_type']),
+        (seed_beers[2]['name'], seed_beers[2]['brewery'], seed_beers[2]['abv'], seed_beers[2]['type'], seed_beers[2]['receptacle_size'], seed_beers[2]['receptacle_type']),
+        (seed_beers[3]['name'], seed_beers[3]['brewery'], seed_beers[3]['abv'], seed_beers[3]['type'], seed_beers[3]['receptacle_size'], seed_beers[3]['receptacle_type']),
+        (seed_beers[4]['name'], seed_beers[4]['brewery'], seed_beers[4]['abv'], seed_beers[4]['type'], seed_beers[4]['receptacle_size'], seed_beers[4]['receptacle_type']),
+        (seed_beers[5]['name'], seed_beers[5]['brewery'], seed_beers[5]['abv'], seed_beers[5]['type'], seed_beers[5]['receptacle_size'], seed_beers[5]['receptacle_type']),
     ]
-    db.executemany("INSERT INTO beers VALUES(?, ?, ?, ?, ?, ?, ?)", data)
+    db.executemany("INSERT INTO beers (name, brewery, abv, type, receptacle_size, receptacle_type) VALUES(?, ?, ?, ?, ?, ?)", data)
     db.commit()
 
 @click.command('init-db')

@@ -58,6 +58,6 @@ def test_put_beer_by_id(mock_put_beer_by_id):
         headers={"Content-Type": "application/json"}
         )
 
-    mock_put_beer_by_id.assert_called_with('1')
+    mock_put_beer_by_id.assert_called_with('1', seed_beers[0])
     assert response.status_code == 200
     assert response.json == seed_beers[0]    

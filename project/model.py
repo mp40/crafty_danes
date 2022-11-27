@@ -16,13 +16,48 @@ def get_beers():
     return serialized_beers
 
 def get_beer_by_id(id):
-    return 'beer'
+    db = get_db()
+    beer = db.execute('SELECT * FROM beers WHERE id = ?;', [id]).fetchall()
+    db.close()
+
+    return dict(beer[0])
 
 def post_beer(beer):
-    return 'posted beer'    
+    name = beer["name"]
+    brewery = beer["brewery"]
+    abv = beer["abv"]
+    type = beer["type"]
+    receptacle_size = beer["receptacle_size"]
+    receptacle_type = beer["receptacle_type"]
+
+    db = get_db()
+    db.execute('INSERT INTO beers (name, brewery, abv, type, receptacle_size, receptacle_type) VALUES(?, ?, ?, ?, ?, ?);', [name, brewery, abv, type, receptacle_size, receptacle_type])
+    new_beer = db.execute('SELECT * FROM beers ORDER BY id DESC LIMIT 1').fetchall()
+    db.commit()
+    db.close()
+
+    return dict(new_beer[0])    
 
 def delete_beer_by_id(id):
-    return    
+    db = get_db()
+    db.execute('DELETE FROM beers WHERE id = ?;', [id])
+    db.commit()
+    db.close()
 
-def put_beer_by_id(id):
-    return 'updated beer'
+    return None  
+
+def put_beer_by_id(id, beer):
+    name = beer["name"]
+    brewery = beer["brewery"]
+    abv = beer["abv"]
+    type = beer["type"]
+    receptacle_size = beer["receptacle_size"]
+    receptacle_type = beer["receptacle_type"]
+
+    db = get_db()
+    db.execute('UPDATE beers SET name = ?, brewery = ?, abv = ?, type = ?, receptacle_size = ?, receptacle_type = ? WHERE id = ?;', [name, brewery, abv, type, receptacle_size, receptacle_type, id])
+    updated_beer = db.execute('SELECT * FROM beers WHERE id = ?', [id]).fetchall()
+    db.commit()
+    db.close()
+
+    return dict(updated_beer[0])
