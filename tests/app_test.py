@@ -24,4 +24,4 @@ def test_get_beer_by_id(mock_get_beer):
     response = request.get("/beers/<id>")
 
     assert response.status_code == 200
-    assert response.json == seed_beers
+    assert response.json == seed_beers[0]
