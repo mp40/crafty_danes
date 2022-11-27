@@ -19,9 +19,10 @@ def test_get_beers(mock_get_beers):
     assert response.json == seed_beers
 
 @mock.patch("project.app.get_beer_by_id", return_value=seed_beers[0], autoSpec=True)
-def test_get_beer_by_id(mock_get_beer):
+def test_get_beer_by_id(mock_get_beer_by_id):
     request = app.test_client()
-    response = request.get("/beers/<id>")
+    response = request.get("/beers/1")
 
+    mock_get_beer_by_id.assert_called_with('1')
     assert response.status_code == 200
     assert response.json == seed_beers[0]

@@ -16,7 +16,7 @@ def beers():
 
 @app.route('/beers/<id>')
 def beer(id):
-    beer = get_beer_by_id()
+    beer = get_beer_by_id(id)
     return jsonify(beer)    
 
 if __name__ == "__main__":
